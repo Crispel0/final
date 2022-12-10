@@ -1,0 +1,66 @@
+{% extends 'partials/body.html' %}
+
+
+{% block content %}
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+
+<table id="usuarios" class="display" style="width:100%">
+    <thead>
+      <tr>
+        <th scope=col>Nro</th>
+        <th scope="col">Nombres</th>
+        <th scope="col">Apellidos</th>
+        <th hscope="col">Correo </th>
+        <th scope="col">Tipo de Documento</th>
+        <th scope="col"># Documento</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Fecha de Nacimiento</th>
+        <th scope="col">Rol</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+  
+      {% for usuario in usuarios %}
+      <tr>
+  
+        {% if usuario.estado != '3' %}
+        <td>{{usuario.id}}</td>
+        <td >{{usuario.nombres}}</td>
+        <td>{{usuario.apellidos}}</td>
+        <td>{{usuario.email}}</td>
+        <td>{{usuario.tipoDocumento}}</td>
+        <td>{{usuario.documento}}</td>
+        <td>{{usuario.telefono}}</td>
+        <td>{{usuario.direccion}}</td>
+        <td>{{usuario.fecha_nacimiento}}</td>
+        <td>{{usuario.rol}}</td>
+        <td>{{usuario.estado}}</td>
+        
+        
+      <td><a class="btn btn-primary" href="{% url 'usuarios_editar' usuario.id %}"><abbr title="editar">
+        <i class="fas fa-edit"></i></abbr></a>
+        {% include 'modals/delete_modal.html' %}
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalEliminar{{usuario.id}}"><abbr title="eliminar">          
+          <i class="fas fa-trash-alt"></i></abbr></button>
+      </td>
+      
+      {% endif %}
+
+    </tr>
+    
+
+    {% endfor %}
+
+
+
+  </tbody>
+</table>
+
+{% include 'partials/js.html' %}    
+{% endblock content %}
+    

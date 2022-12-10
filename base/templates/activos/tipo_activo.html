@@ -1,0 +1,13 @@
+{% extends 'partials/body.html' %}
+
+
+{% block content %}
+    {% load crispy_forms_tags %}
+    <h1>Seleccione tipo de activo</h1>
+        <form method="POST">
+        {% csrf_token %}
+        {{form}}
+        <button class="btn btn-success">Continuar</button>
+    </form>
+{% endblock content %}
+    

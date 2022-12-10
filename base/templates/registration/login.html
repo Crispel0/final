@@ -1,0 +1,48 @@
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+</head>
+<body>
+    {% include 'partials/header.html' %}
+    <div class=" my-3 text-danger">
+        {{error}}
+    </div>
+    <div class="container shadow w-25 text-center rounded-5 mt-5">
+        <h1>Iniciar sesion</h1>        
+        <p class="login-box-msg">Bienvenido al Sistema de manejo de activos</p>
+        <form method="POST">
+            <div class="ps-4 mb-3">
+                <i class="fa-solid fa-user"></i>
+                <label for="user" class="form-label">Usuario</label> 
+                {{form.username}}
+            </div>
+            <div class="mb-3">
+                <i class="fa-sharp fa-solid fa-unlock"></i>
+                <label for="password" class="form-label">Contraseña</label>
+                {{form.password}}
+            </div>
+            <i class="bi bi-file-lock2-fill"></i>
+            {% csrf_token %}
+            <div class="my-3">
+                <button type="submit" class="btn btn-success">Iniciar sesion</button>
+            </div>
+            <div class="my-3 text-center">
+                <span><a href="">Recuperar contraseña</a></span>
+            </div>
+        </form>
+    </div>
+</body>
+<script src="https://kit.fontawesome.com/5ac4c3813c.js" crossorigin="anonymous"></script>
+{% include 'partials/footer.html' %}
+</html>
+

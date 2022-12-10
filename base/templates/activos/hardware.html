@@ -1,0 +1,16 @@
+{% extends 'partials/body.html' %}
+
+
+{% block content %}
+    <h1>Formulario Hardware</h1>
+        <form method="POST">
+        {% csrf_token %}
+        {% load crispy_forms_tags %}
+            {{form | crispy }}
+        <button class="btn btn-success">Guardar</button>
+    </form>
+    <form action="{% url 'tipo_activo' %}" method="get">
+        <button type="submit" class="btn btn-primary">Volver</button>
+    </form>
+{% endblock content %}
+    
