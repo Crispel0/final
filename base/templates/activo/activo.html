@@ -1,0 +1,40 @@
+{% extends 'partials/body.html' %}
+
+ 
+ {% block head %}   
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css"> 
+ {% endblock head %}
+    
+{% block content %}
+    {% load crispy_forms_tags %}
+    <h1>Seleccione tipo de activo</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{form}}
+        <button class="btn btn-success">Continuar</button>
+    </form>
+
+<table id="activos" class="display" style="width:100%">
+    <thead>
+      <tr>
+        <th scope=col>Nro</th>
+        <th scope="col"> Marca</th>
+        <th scope="col">Nro de serie</th>
+        <th hscope="col">Tipo de activo</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for activo in activos %}
+    <tr>            
+        <td>{{activo.id}}</td>
+        <td >{{activo.marca}}</td>
+        <td>{{activo.serie}}</td>
+        <td>{{activo.tipo_activo}}</td>
+    </tr> 
+    {% endfor %}
+
+  </tbody>
+</table>
+{% include 'partials/js.html' %}    
+{% endblock content %}
+    

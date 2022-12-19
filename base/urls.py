@@ -22,8 +22,13 @@ urlpatterns =[
     path('admin/', admin.site.urls),
     path('',auth_views.LoginView.as_view(),name='inicio'),
     path('', include('django.contrib.auth.urls')),
+    path('reiniciar/',auth_views.PasswordResetView.as_view(),name='pass_reset'),
+    path('reiniciar/enviar',auth_views.PasswordResetDoneView.as_view(),name='pass_reset_done'),
+    path('reiniciar/<uid64>/<token>',auth_views.PasswordResetConfirmView.as_view(),name='pass_reset_confirm'),
+    path('reiniciar/completo',auth_views.PasswordResetCompleteView.as_view(),name='pass_reset_reset_complete'),
     path('index/', index, name='index'),
     path("salir/", salir, name='salir'),
     path('usuarios/',include('usuarios.urls')),
     path('activos/',include('activos.urls')),
+    path('activo/',include('activo.urls')),
 ]

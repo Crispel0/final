@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5", #pip install crispy-bootstrap5
     'bootstrap_modal_forms',#pip install django-bootstrap-modal-forms
     'activos',
+    'activo',
     
 ]
 
@@ -147,3 +148,9 @@ LOGIN_URL= 'inicio'
 
 LOGIN_REDIRECT_URL= 'index'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.googlemail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'alejoc9302@gmail.com'
+EMAIL_HOST_PASSWORD = 'epbwyorbenbssjjl'
+EMAIL_USE_TLS = True

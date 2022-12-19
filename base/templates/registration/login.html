@@ -14,35 +14,44 @@
 </head>
 <body>
     {% include 'partials/header.html' %}
-    <div class=" my-3 text-danger">
-        {{error}}
-    </div>
+    
     <div class="container shadow w-25 text-center rounded-5 mt-5">
-        <h1>Iniciar sesión</h1>        
-        <p class="login-box-msg">Bienvenido al Sistema de manejo de activos</p>
-        <form method="POST">
-            <div class="ps-4 mb-3">
-                <i class="fa-solid fa-user"></i>
-                <label for="user" class="form-label">Usuario</label> 
-                {{form.username}}
+        <div class="card text-center">
+            <div class="card-header">
+              <h1>Iniciar sesión</h1> 
             </div>
-            <div class="mb-3">
-                <i class="fa-sharp fa-solid fa-unlock"></i>
-                <label for="password" class="form-label">Contraseña</label>
-                {{form.password}}
-            </div>
-            <i class="bi bi-file-lock2-fill"></i>
-            {% csrf_token %}
-            <div class="my-3">
+        </div>
+    
+        <div class="card-body">
+            <p class="login-box-msg">Bienvenido al Sistema de manejo de activos</p>
+            <form method="POST">
+                <div class="ps-4 mb-3">
+                    <i class="fa-solid fa-user"></i>
+                    <label for="user" class="form-label">Usuario</label> 
+                    {{form.username}}
+                </div>
+                <div class="mb-3">
+                    <i class="fa-sharp fa-solid fa-unlock"></i>
+                    <label for="password" class="form-label">Contraseña</label>
+                    {{form.password}}
+                </div>
+                <i class="bi bi-file-lock2-fill"></i>
+                {% csrf_token %}
+        </div>
+            <div>
                 <button type="submit" class="btn btn-success">Iniciar sesión</button>
             </div>
+            {% if form.non_field_errors %}
+                <p style="color:red">Usuario o contraseña incorrectos, prueba denuevo.</p> 
+            {% endif %}
             <div class="my-3 text-center">
-                <span><a href="">Recuperar contraseña</a></span>
+                <span><a href="{% url 'pass_reset' %}">Recuperar contraseña</a></span>
             </div>
-        </form>
+            </form>
     </div>
 </body>
 <script src="https://kit.fontawesome.com/5ac4c3813c.js" crossorigin="anonymous"></script>
 {% include 'partials/footer.html' %}
+{{error}}
 </html>
 
