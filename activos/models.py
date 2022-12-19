@@ -1,9 +1,19 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.utils.translation import gettext_lazy as _
 # Create your models here.
+
+class TipoActivo(models.Model):
+    marca = models.CharField(max_length = 60, null=False, blank=False, verbose_name= "marca")
+    serie = models.CharField(max_length=90, null=False, blank=False, unique=True,verbose_name= "Nro de serie")
+    class Activo(models.TextChoices):
+        computador = '0', _('Computador')
+        impresora = '1', _('Impresora')
+    tipo_activo= models.CharField(max_length=1, choices=Activo.choices, verbose_name="Tipo de activo")
+
+
+class RegistroActivo(models.Model):
+    fecha_creacion = models.DateField(auto_now_add = True)
+    tipo_activo =models.ForeignKey(TipoActivo, on_delete=models.CASCADE)
 
 class Tipo(models.Model):
     Hardware = '1'
@@ -13,13 +23,14 @@ class Tipo(models.Model):
         (Hardware, 'Hardware'),
         (Software, 'Software'),
     )
-    tipo = models.CharField(max_length=15, choices=LEVEL_CHOICES, default=Hardware)
+    tipo = models.CharField(max_length=15, choices=LEVEL_CHOICES)
+
 class Software(models.Model):     
     class SistemaOperativo(models.TextChoices):
         Windows = '0', _('Windows')
         linux = '1', _('Linux')
         Mac = '2', _('Mac')
-    sistema_operativo= models.CharField(max_length=1, choices=SistemaOperativo.choices, default=SistemaOperativo.Windows, verbose_name="Sistema operativo")
+    sistema_operativo= models.CharField(max_length=1, choices=SistemaOperativo.choices, verbose_name="Sistema operativo")
 
     class VersionSistemaOp(models.TextChoices):
         windows7 = '0', _('Windows 7')
@@ -35,14 +46,14 @@ class Software(models.Model):
         sierra = '10', _('sierra')
         monterrey = '11', _('monterrey')
         bigsurf = '12', _('bigsufr')
-    version_sistema_op= models.CharField(max_length=2, choices=VersionSistemaOp.choices, default=VersionSistemaOp.windows10, verbose_name="Versión sistema operativo")
+    version_sistema_op= models.CharField(max_length=2, choices=VersionSistemaOp.choices, verbose_name="Versión sistema operativo")
     
     class Ofimatica(models.TextChoices):
          moffice= '0', _('Microsoft office') 
          loffice= '1', _('Libre office')
          ooffice= '2', _('Open office')
          ninguno = '3',_("No instalado")
-    ofimatica= models.CharField(max_length=1, choices=Ofimatica.choices, default= Ofimatica.moffice, verbose_name="Ofimatica")
+    ofimatica= models.CharField(max_length=1, choices=Ofimatica.choices,  verbose_name="Ofimatica")
 
     class VersionOfimatica(models.TextChoices):
         v2007 ='0',_("2007")
@@ -62,7 +73,7 @@ class Software(models.Model):
         v410 = '14',_("4.1.0")
         v400 = '15',_("4.0.0")
         ninguno = '16',_("No instalado")        
-    version_ofimatica=models.CharField(max_length=3, choices=VersionOfimatica.choices, default=VersionOfimatica.v2019, verbose_name="Versión ofimatica")
+    version_ofimatica=models.CharField(max_length=3, choices=VersionOfimatica.choices, verbose_name="Versión ofimatica")
 
     class Antivirus(models.TextChoices):
         endpoint = '0', _('endpoint')
@@ -98,14 +109,11 @@ class Software(models.Model):
         dropbox= '2', _('dropbox')
         amazon= '3', _('amazon cloud')
         ninguno= '4', _('No instalado')
-
-    herramienta_cloud= models.CharField(max_length=1, choices=HerramientaCloud.choices, default=HerramientaCloud.ninguno, verbose_name="Herramienta Cloud")
-
-
+    herramienta_cloud= models.CharField(max_length=1, choices=HerramientaCloud.choices, verbose_name="Herramienta Cloud")
+    
 class Hardware(models.Model):
 
-    marca = models.CharField(max_length = 100, verbose_name= "marca")
     modelo = models.CharField(max_length = 100, verbose_name= "modelo")
-    serie = models.CharField(max_length = 100, verbose_name= "serie" )
     capacidad = models.CharField(max_length = 100, verbose_name= "capacidad")
     no_aplica = models.CharField(max_length = 100, verbose_name= "no aplica")
+    

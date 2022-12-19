@@ -13,9 +13,14 @@
     <title>{{ titulo }}</title>
     {% load static %}
     <link rel="shortcut icon" href="{% static  'img/favicon.png' %}">
-
+    
+    {% block head %}
+        
+    {% endblock head %}
+        
 </head>
 {% include 'partials/header.html' %}
+
 <style>
     .bgnavbar{
         background: #F8F0FB;

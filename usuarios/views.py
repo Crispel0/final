@@ -20,7 +20,7 @@ def usuarios(request):
     }
     return render(request,'usuarios/usuarios.html',context)
 
-
+@login_required(login_url='inicio')
 def usuarios_crear(request):
     titulo="Crear-Usuarios"
     if request.method == "POST":
@@ -64,7 +64,7 @@ def usuarios_crear(request):
     }
     return render(request,'usuarios/crear.html',context)
 
-
+@login_required(login_url='inicio')
 def usuarios_editar(request, pk):
     titulo="Usuarios - Editar"
     usuario= Usuario.objects.get(id=pk)
@@ -83,6 +83,7 @@ def usuarios_editar(request, pk):
     }
     return render(request,'usuarios/crear.html',context)
 
+@login_required(login_url='inicio')
 def usuarios_eliminar(request, pk): 
         usuario= Usuario.objects.all()
         Usuario.objects.filter(id=pk).update(
